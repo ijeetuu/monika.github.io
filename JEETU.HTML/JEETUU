@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Request Media Access</title>
+  </head>
+  <body>
+    <video id="video-element"></video>
+
+    <script>
+      const constraints = {
+        video: true,
+        audio: true,
+      };
+
+      async function requestMediaAccess() {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia(constraints);
+          console.log("Access granted!");
+          console.log(stream);
+
+          const videoElement = document.getElementById("video-element");
+          videoElement.srcObject = stream;
+          videoElement.playsInline = true;
+          videoElement.play();
+        } catch (err) {
+          console.error("Access denied:", err);
+        }
+      }
+
+      requestMediaAccess();
+    </script>
+  </body>
+</html>
